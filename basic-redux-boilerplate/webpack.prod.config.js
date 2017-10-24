@@ -17,7 +17,8 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'public'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    publicPath: '/public/'
   },
   module: {
     loaders: [
@@ -37,6 +38,14 @@ module.exports = {
   plugins: [
     HtmlWebpackPluginConfig,
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true, compress: { warnings: false }
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
   ] 
 }
