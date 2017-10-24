@@ -1,6 +1,6 @@
 /**
  * 
- * app.js
+ * index.js
  * 
  * This is the entry file for the application, 
  * only setup and boilerplate code.
@@ -12,6 +12,8 @@ import { createStore, applyMiddleware } from 'redux';
 
 import App from './components/app';
 import reducers from './rootReducer';
+
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDom.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
